@@ -16,11 +16,13 @@ router.get('/', (req, res) => {
       },
       {
         model: Tag,
-        attributes: ['tag_name']
+        attributes: ['tag_name'],
+        through: ProductTag,
+        as: 'tags'
       }
     ]
   })
-    .then(dbProductData => res.json(dbProductData))
+    .then(dbProductData => res.status(200).json(dbProductData))
     .catch(err => {
       console.log(err);
       res.status(500).json(err);
@@ -43,15 +45,18 @@ router.get('/:id', (req, res) => {
       },
       {
         model: Tag,
-        attributes: ['tag_name']
+        attributes: ['tag_name'],
+        through: ProductTag,
+        as: 'tags'
       }
     ]
   })
     .then(dbProductData => {
       if (!dbProductData) {
-        res.status(404).json({ message: `No categories associated with id - ${req.params.id}` });
+        res.status(404).json({ message: `No products associated with id - ${req.params.id}` });
         return;
       }
+      res.status(200).json(dbProductData); 
     })
     .catch(err => {
       console.log(err);
@@ -142,7 +147,7 @@ router.delete('/:id', (req, res) => {
   })
     .then(dbCategoryData => {
       if (!dbCategoryData) {
-        res.status(404).json({ message: `No categories associated with id - ${req.params.id}` });
+        res.status(404).json({ message: `No products associated with id - ${req.params.id}` });
         return;
       }
       res.status(200).json(dbCategoryData);

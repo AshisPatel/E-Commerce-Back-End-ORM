@@ -13,7 +13,7 @@ router.get('/', (req, res) => {
         attributes: ['product_name', 'price', 'stock']
       }
     })
-    .then(dbCategoryData => res.json(dbCategoryData))
+    .then(dbCategoryData => res.status(200).json(dbCategoryData))
     .catch(err => {
       console.log(err);
       res.status(500).json(err); 
@@ -38,7 +38,7 @@ router.get('/:id', (req, res) => {
       res.status(404).json({ message: `No categories associated with id - ${req.params.id}` });
       return;
     }
-    res.json(dbCategoryData); 
+    res.status(200).json(dbCategoryData); 
   })
   .catch(err => {
     console.log(err);
@@ -51,7 +51,7 @@ router.post('/', (req, res) => {
   Category.create({
     category_name: req.body.category_name
   })
-  .then(dbCategoryData => res.json(dbCategoryData))
+  .then(dbCategoryData => res.status(200).json(dbCategoryData))
   .catch(err => {
     console.log(err);
     res.status(400).json(err); 
@@ -69,10 +69,10 @@ router.put('/:id', (req, res) => {
   .then(dbCategoryData => {
     // Checks to see if dbCategoryData[0] = 0 , which will register as false. If succesful, dbCategoryData returns 1 which means true! Or why? 
     if(!dbCategoryData[0]) {
-      res.status(404).json({ message: `No categories associated with id - ${req.params.id}` });
+      res.status(404).json({ message: `No categories associated with id - ${req.params.id} or new category name is the same as the old category name`});
       return; 
     }
-    res.json(dbCategoryData); 
+    res.status(200).json(dbCategoryData); 
   })
   .catch(err => {
     console.log(err);
@@ -92,7 +92,7 @@ router.delete('/:id', (req, res) => {
       res.status(404).json({ message: `No categories associated with id - ${req.params.id}` });
       return;
     }
-    res.json(dbCategoryData); 
+    res.status(200).json(dbCategoryData); 
   })
   .catch(err => {
     console.log(err);
