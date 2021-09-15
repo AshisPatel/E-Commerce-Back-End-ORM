@@ -6,7 +6,7 @@
 
   <h2>Functionality</h2>
 
-This project heavily utilizes both Express.js and Sequelize in the Node.js to create a functional back end for an ecommerce platform that stores its information in a MySql database. Additionally, the project utilizes the dotenv package to read environment variables from a local .env file in the directory when connecting to MySql via Sequelize. These environment variables allow us to keep information like the user's MySql username and password private. Express.js is used to create a server and it's Router functionality is used to create routes to the perform CRUD operations on the models, which we will be discussing in the next paragraph.
+This project heavily utilizes both Express.js and Sequelize in the Node.js to create a functional back end for an ecommerce platform that stores its information in a MySql database. Additionally, the project utilizes the dotenv package to read environment variables from a local .env file in the directory when connecting to MySql via Sequelize. These environment variables allow us to keep information like the user's MySql username and password private. Express.js is used to create a server and its Router functionality is used to create routes to the perform CRUD operations on the models, which we will be discussing in the next paragraph.
 
 There are four models that are present in the models directory: Category, Product, ProductTag, and Tag. There are only associations for the Category, Product, and Tag models. The Category model is associated with the Product model in a one-to-many relationship. One category can have many products, however a product may only be associated with one category. The Product and Tag models have a many-to-many relationship. A product can have multiple tags and a tag may belong to multiple products. These two models however are associated through the ProductTag model. The ProductTag model contains two foreign keys, the tag_id and product_id, which reference the primary key 'id' in the Tag and Product model. This allows us to reference the Product and Tag models when performing requests on either models (in the routes directory) through the assocation we created for Sequelize. 
 
@@ -25,7 +25,7 @@ The CRUD operations were all created in the routes directory for interactions wi
   <ol>
     <li>Install node.js and MySql for your operating system. (MySql and Node.js may need additional configuration upon installation depending on your OS)</li> 
     <li>Clone or download the contents of this project's repo onto your local machine. </li> 
-    <li>Naviage to the cloned directory via your terminal.</li> 
+    <li>Navigate to the cloned directory via your terminal.</li> 
     <li>Run 'npm -install' to download the required dependencies. </li> 
     <li>Create a .env file and use the dotenv package to utilize the environment variables in the config/connection.js file. (These will be used to connect to MySql and help keep your information private)</li> 
     <li>Connect to the MySql shell in your terminal and run the schema.sql file in the db directory. </li> 
